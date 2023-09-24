@@ -1,50 +1,50 @@
 # LISTE DE COURSES
 
-liste = []
+import sys
 
-# Boucle principale
+LISTE = []
 
-while True:
-	print("""
-Choisissez parmi les 5 options suivantes :
+MENU = """Choisisessez par les 5 options suivantes :
 1: Ajouter un élément à la liste
 2: Retirer un élément de la liste
 3: Afficher la liste
 4: Vider la liste
-5: Quitter""")
+5: Quitter
+👉 Votre choix : """
 
-	choix = input("👉 Votre choix : ")	# Entrer utilisateur
+MENU_CHOICES = ["1", "2", "3", "4", "5"]
 
-	if choix == "1":	# Ajout d'un élément
-		element = input("Entrez le nom d'un élément à ajouter à la liste de courses: ")
-		liste.append(element)
-		print(f"L'élément {element} a bien été ajouté à la liste.")
 
-	elif choix == "3":	# Afficher le contenu de la liste de courses
-		print("Voici le contenu de votre liste: ")
-		if len(liste) == 0:
-			print("Votre liste ne contient aucun élément.")
+while True:
+	user_choice = ""
+	while user_choice not in MENU_CHOICES:
+		user_choice = input(MENU)
+		if user_choice not in MENU_CHOICES:
+			print("Veillez choisir une option valide...")
+	if user_choice == "1":	# Ajouter un élément
+		item = input("Entrez le nom d'un élément à ajouter à la liste de courses : ")
+		LISTE.append(item)
+		print(f"L'élément {item} a bien été ajouté à la liste. ")
+	elif user_choice == "2":	# Retirer un élément
+		item = input("Entrez le nom d'un élément à retirer de la liste de courses: ")
+		if item in LISTE:
+			LISTE.remove(item)
+			print(f"L'élément {item} a bien été supprimé de la liste.")
 		else:
-			for i in range(len(liste)):
-				print(f"{i+1}. {liste[i]} ")
-
-	elif choix == "2":	# Retirer un élément de la liste de courses
-		sup_element = input("Entrez le nom d'un élément à retirer de la liste de courses : ")
-		for i in range(len(liste)):
-			if sup_element != liste[i]:
-				continue
-			elif sup_element == liste[i]:
-				liste.remove(sup_element)
-				print(f"L'élément {sup_element} a bien été supprimé de la liste.")
-				break
-			else:
-				print(f"L'élément {sup_element} n'est pas dans la liste.")
-
-	elif choix == "4":	# Vider la liste de courses
-		liste.clear()
-		print("La liste à été vidée de son contenu.")
-		
-	elif choix == "5":	# Quitter la liste de courses
+			print(f"L'élément {item} n'est pas dans la liste.")
+	elif user_choice == "3":	# Afficher la liste
+		if LISTE:
+			print("Voici le contenu de votre liste :")
+			for i, item in enumerate(LISTE, 1):
+				print(f"{i}. {item}")
+		else:
+			print("Votre liste ne contient aucun élément.")
+	elif user_choice == "4":	# Vider la liste
+		LISTE.clear()
+		print("La liste a été vidée de son contenu.")
+	elif user_choice == "5":
 		print("A bientôt !")
-		break
+		sys.exit()
+	print("-" * 50)
+
 
